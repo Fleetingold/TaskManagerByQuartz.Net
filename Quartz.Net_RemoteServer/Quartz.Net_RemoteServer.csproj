@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D48A984F-0D7B-40DF-A2B2-633EAB6EC7B2}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Quartz.Net_RemoteServer</RootNamespace>
+    <AssemblyName>Quartz.Net_RemoteServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\Lib\Quartz\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\Lib\Quartz\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mysql\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Mysql\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\Lib\Quartz\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Topshelf">
+      <HintPath>..\Lib\Quartz\Topshelf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Events\Observer.cs" />
+    <Compile Include="Events\ObserverBase.cs" />
+    <Compile Include="Events\SubjectBase.cs" />
+    <Compile Include="Listeners\MyJobListener.cs" />
+    <Compile Include="Listeners\MySchedulerListener.cs" />
+    <Compile Include="Listeners\MyTriggerListener.cs" />
+    <Compile Include="Models\JobExcutedCallBackModel.cs" />
+    <Compile Include="Models\SchedulerExecutedCallBackModel.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuartzServer.cs" />
+    <Compile Include="RemotingSchedulerExporterOverrided\RemotingSchedulerExporterOverrided.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="InstallWindowsServer\Install.bat" />
+    <None Include="log4net.config" />
+    <None Include="RemoteServer.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Quartz.Net_Core\Quartz.Net_Core.csproj">
+      <Project>{cb34c0fd-c614-4ba6-8db9-beed636e80bc}</Project>
+      <Name>Quartz.Net_Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Quartz.Net_Infrastructure\Quartz.Net_Infrastructure.csproj">
+      <Project>{0dae60bb-e900-4632-8593-096f2550fb13}</Project>
+      <Name>Quartz.Net_Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Quartz.Net_RepositoryImplements\Quartz.Net_RepositoryImplements.csproj">
+      <Project>{8c668a9f-3d9e-4d24-bd59-a58c0be1c1e0}</Project>
+      <Name>Quartz.Net_RepositoryImplements</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Quartz.Net_RepositoryInterface\Quartz.Net_RepositoryInterface.csproj">
+      <Project>{19211b50-6429-441c-bf24-416fb4cc1af3}</Project>
+      <Name>Quartz.Net_RepositoryInterface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
